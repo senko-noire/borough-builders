@@ -284,6 +284,90 @@
             cursor: pointer; text-decoration: none;
         }
 
+        /* Вакансии */
+        #jobs-wrap {
+            display: none;
+        }
+        .job-card {
+            border: 2px solid #777;
+            background: #f0ede3;
+            margin-bottom: 10px;
+        }
+        .job-card .job-header {
+            background: linear-gradient(to bottom, #ddd, #bbb);
+            padding: 5px 10px;
+            border-bottom: 1px solid #999;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .job-card .job-header h4 {
+            font-size: 15px; color: #222; font-weight: bold;
+        }
+        .job-card .job-header .job-pay {
+            font-size: 13px; color: #8b0000; font-weight: bold;
+        }
+        .job-card .job-body {
+            padding: 8px 10px;
+            font-size: 12px; color: #333; line-height: 1.4;
+        }
+        .job-card .job-footer {
+            background: linear-gradient(to bottom, #333, #111);
+            padding: 6px 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid #555;
+        }
+        .job-card .job-badge {
+            font-size: 11px; color: #c4a000; font-weight: bold;
+            text-shadow: 1px 1px 1px #000;
+        }
+        .job-card .btn-apply {
+            background: linear-gradient(to bottom, #4a8a4a, #2a5a2a);
+            color: #fff; border: 2px solid #1a3a1a;
+            padding: 4px 14px; font-size: 12px; font-weight: bold;
+            cursor: pointer; text-decoration: none;
+        }
+
+        /* Цены на материалы */
+        #materials-wrap {
+            display: none;
+        }
+        .materials-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #666;
+            background: #f0ede3;
+            margin-bottom: 12px;
+        }
+        .materials-table th {
+            background: linear-gradient(to bottom, #444, #222);
+            color: #fff;
+            font-size: 13px;
+            padding: 8px;
+            border: 1px solid #555;
+            text-align: left;
+        }
+        .materials-table td {
+            padding: 6px 8px;
+            border: 1px solid #999;
+            font-size: 12px;
+            color: #333;
+        }
+        .materials-table tr:nth-child(even) {
+            background: #e8e4d8;
+        }
+        .materials-table .price-cell {
+            font-weight: bold;
+            color: #8b0000;
+            text-align: right;
+        }
+        .materials-table .unit-cell {
+            color: #555;
+            font-size: 11px;
+        }
+        .materials-note {
+            font-size: 11px; color: #666; font-style: italic;
+            margin-top: 4px; margin-bottom: 12px;
+        }
+
         /* Подвал */
         #footer {
             max-width: 1100px; margin: 0 auto;
@@ -314,6 +398,7 @@
             font-weight: bold;
         }
     </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -399,8 +484,10 @@
     <div id="content">
 
         <div class="top-actions">
-            <a href="#" onclick="showSection('catalog');return false;">« Каталог услуг</a>
-            <a href="#" onclick="showSection('orders');return false;" style="margin-left:6px;">Управление заказами »</a>
+            <a href="#" onclick="showSection('catalog');return false;">« Каталог</a>
+            <a href="#" onclick="showSection('jobs');return false;" style="margin-left:4px;">Вакансии</a>
+            <a href="#" onclick="showSection('materials');return false;" style="margin-left:4px;">Материалы</a>
+            <a href="#" onclick="showSection('orders');return false;" style="margin-left:4px;">Заказы »</a>
         </div>
 
         <!-- КАТАЛОГ УСЛУГ -->
@@ -709,6 +796,343 @@
             </div>
         </div>
 
+        <!-- ВАКАНСИИ -->
+        <div id="jobs-wrap">
+            <div class="content-header">
+                <h2>Вакансии</h2>
+                <div class="sub">Присоединяйтесь к команде Borough Builders Co. — строим Бруклин вместе</div>
+            </div>
+
+            <div class="notice-bar">
+                Все вакансии актуальны на 17 июня 2006 года. Оплата еженедельная, наличными.
+            </div>
+
+            <div class="intro-text">
+                Мы всегда ищем надёжных людей. Опыт не обязателен — обучаем с нуля. 
+                Работа в 29-м секторе Бруклина и соседних районах. Инструменты и спецодежду выдаём.
+            </div>
+
+            <!-- Вакансия 1 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h4>Грузчик / Подсобный рабочий</h4>
+                    <span class="job-pay">$12 / час</span>
+                </div>
+                <div class="job-body">
+                    Разгрузка материалов, подача инструментов, уборка строительного мусора. 
+                    Физическая форма обязательна. Работа на открытом воздухе и в помещениях. 
+                    График: Пн-Пт 7:00–17:00, Сб по необходимости.
+                </div>
+                <div class="job-footer">
+                    <span class="job-badge">Требуется: 3 человека</span>
+                    <a href="#" class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.');return false;">Откликнуться »</a>
+                </div>
+            </div>
+
+            <!-- Вакансия 2 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h4>Плиточник</h4>
+                    <span class="job-pay">$18 / час</span>
+                </div>
+                <div class="job-body">
+                    Укладка керамической и мозаичной плитки в ванных, кухнях и коммерческих помещениях. 
+                    Опыт от 2 лет приветствуется, но готовы взять стажёра с золотыми руками. 
+                    Знание уровня и плиткореза обязательно.
+                </div>
+                <div class="job-footer">
+                    <span class="job-badge">Требуется: 2 человека</span>
+                    <a href="#" class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.');return false;">Откликнуться »</a>
+                </div>
+            </div>
+
+            <!-- Вакансия 3 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h4>Электрик</h4>
+                    <span class="job-pay">$22 / час</span>
+                </div>
+                <div class="job-body">
+                    Монтаж и замена электропроводки в жилых и коммерческих объектах. 
+                    Знание NEC-кодов, умение читать схемы. Лицензия электрика NYC — плюс, но не обязательна. 
+                    Работа с медью, PEX, щитками.
+                </div>
+                <div class="job-footer">
+                    <span class="job-badge">Требуется: 1 человек</span>
+                    <a href="#" class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.');return false;">Откликнуться »</a>
+                </div>
+            </div>
+
+            <!-- Вакансия 4 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h4>Маляр / Штукатур</h4>
+                    <span class="job-pay">$16 / час</span>
+                </div>
+                <div class="job-body">
+                    Покраска стен и потолков, шпаклёвка, штукатурка. 
+                    Умение работать с краскопультом и валиком. Аккуратность и чистота — главное. 
+                    Опыт от 1 года. Работа на высоте до 3 метров.
+                </div>
+                <div class="job-footer">
+                    <span class="job-badge">Требуется: 2 человека</span>
+                    <a href="#" class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.');return false;">Откликнуться »</a>
+                </div>
+            </div>
+
+            <!-- Вакансия 5 -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h4>Водитель грузовика (Box Truck)</h4>
+                    <span class="job-pay">$15 / час + чаевые</span>
+                </div>
+                <div class="job-body">
+                    Доставка материалов и инструментов на объекты по Бруклину и Манхэттену. 
+                    Категория C обязательна. Знание улиц Нью-Йорка. 
+                    Помощь в погрузке/разгрузке. Чистая водительская история.
+                </div>
+                <div class="job-footer">
+                    <span class="job-badge">Требуется: 1 человек</span>
+                    <a href="#" class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.');return false;">Откликнуться »</a>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; padding:10px; background:#e8e4d8; border:1px dashed #999; font-size:12px; color:#555;">
+                <b>Как устроиться:</b><br>
+                1. Позвоните по телефону (718) 627-3155<br>
+                2. Приходите на собеседование по адресу 452 Atlantic Ave, пн-пт с 9:00 до 16:00<br>
+                3. Не забудьте ID и Social Security Card
+            </div>
+        </div>
+
+        <!-- ЦЕНЫ НА МАТЕРИАЛЫ -->
+        <div id="materials-wrap">
+            <div class="content-header">
+                <h2>Цены на материалы</h2>
+                <div class="sub">Актуальный прайс-лист на строительные материалы — июнь 2006</div>
+            </div>
+
+            <div class="notice-bar">
+                При заказе услуг материалы по оптовым ценам — скидка до 15%
+            </div>
+
+            <div class="intro-text">
+                Ниже указаны розничные цены на популярные материалы. 
+                Для крупных заказов и подрядчиков — специальные условия. 
+                Доставка по Бруклину от $50 (бесплатно при заказе от $500).
+            </div>
+
+            <!-- Сухие смеси и цемент -->
+            <h3 style="font-size:16px; color:#222; margin:12px 0 6px; border-bottom:2px solid #c4a000; padding-bottom:3px;">Сухие смеси и цемент</h3>
+            <table class="materials-table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Единица</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>Цемент М-500</td>
+                    <td>Quikrete</td>
+                    <td class="unit-cell">мешок 50 кг</td>
+                    <td class="price-cell">$8.50</td>
+                </tr>
+                <tr>
+                    <td>Штукатурка гипсовая</td>
+                    <td>USG Sheetrock</td>
+                    <td class="unit-cell">мешок 25 кг</td>
+                    <td class="price-cell">$12.00</td>
+                </tr>
+                <tr>
+                    <td>Шпаклёвка финишная</td>
+                    <td>DAP</td>
+                    <td class="unit-cell">ведро 5 кг</td>
+                    <td class="price-cell">$9.75</td>
+                </tr>
+                <tr>
+                    <td>Плиточный клей</td>
+                    <td>Custom Building Products</td>
+                    <td class="unit-cell">мешок 22 кг</td>
+                    <td class="price-cell">$18.50</td>
+                </tr>
+                <tr>
+                    <td>Самовыравнивающийся пол</td>
+                    <td>Henry</td>
+                    <td class="unit-cell">мешок 22 кг</td>
+                    <td class="price-cell">$24.00</td>
+                </tr>
+            </table>
+
+            <!-- Гипсокартон и профили -->
+            <h3 style="font-size:16px; color:#222; margin:12px 0 6px; border-bottom:2px solid #c4a000; padding-bottom:3px;">Гипсокартон и профили</h3>
+            <table class="materials-table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Единица</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>ГКЛ стеновой 12.5 мм</td>
+                    <td>USG Sheetrock</td>
+                    <td class="unit-cell">лист 1.2×2.5 м</td>
+                    <td class="price-cell">$12.50</td>
+                </tr>
+                <tr>
+                    <td>ГКЛ влагостойкий 12.5 мм</td>
+                    <td>USG Sheetrock</td>
+                    <td class="unit-cell">лист 1.2×2.5 м</td>
+                    <td class="price-cell">$16.00</td>
+                </tr>
+                <tr>
+                    <td>Профиль направляющий ПН 50×40</td>
+                    <td>Knauf</td>
+                    <td class="unit-cell">шт 3 м</td>
+                    <td class="price-cell">$4.25</td>
+                </tr>
+                <tr>
+                    <td>Профиль стоечный ПС 50×50</td>
+                    <td>Knauf</td>
+                    <td class="unit-cell">шт 3 м</td>
+                    <td class="price-cell">$5.50</td>
+                </tr>
+                <tr>
+                    <td>Минеральная вата (звукоизоляция)</td>
+                    <td>Owens Corning</td>
+                    <td class="unit-cell">упаковка</td>
+                    <td class="price-cell">$28.00</td>
+                </tr>
+            </table>
+
+            <!-- Краски и лаки -->
+            <h3 style="font-size:16px; color:#222; margin:12px 0 6px; border-bottom:2px solid #c4a000; padding-bottom:3px;">Краски и лаки</h3>
+            <table class="materials-table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Единица</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>Краска интерьерная Regal</td>
+                    <td>Benjamin Moore</td>
+                    <td class="unit-cell">галлон 3.8 л</td>
+                    <td class="price-cell">$45.00</td>
+                </tr>
+                <tr>
+                    <td>Краска фасадная Aura</td>
+                    <td>Benjamin Moore</td>
+                    <td class="unit-cell">галлон 3.8 л</td>
+                    <td class="price-cell">$62.00</td>
+                </tr>
+                <tr>
+                    <td>Грунтовка универсальная</td>
+                    <td>KILZ</td>
+                    <td class="unit-cell">галлон 3.8 л</td>
+                    <td class="price-cell">$22.50</td>
+                </tr>
+                <tr>
+                    <td>Лак паркетный полиуретановый</td>
+                    <td>Minwax</td>
+                    <td class="unit-cell">галлон 3.8 л</td>
+                    <td class="price-cell">$38.00</td>
+                </tr>
+            </table>
+
+            <!-- Напольные покрытия -->
+            <h3 style="font-size:16px; color:#222; margin:12px 0 6px; border-bottom:2px solid #c4a000; padding-bottom:3px;">Напольные покрытия</h3>
+            <table class="materials-table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Единица</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>Ламинат 8 мм, класс 32</td>
+                    <td>Pergo</td>
+                    <td class="unit-cell">м²</td>
+                    <td class="price-cell">$4.50</td>
+                </tr>
+                <tr>
+                    <td>Паркетная доска дуб</td>
+                    <td>Bruce</td>
+                    <td class="unit-cell">м²</td>
+                    <td class="price-cell">$8.75</td>
+                </tr>
+                <tr>
+                    <td>Керамическая плитка 30×30</td>
+                    <td>Daltile</td>
+                    <td class="unit-cell">м²</td>
+                    <td class="price-cell">$12.00</td>
+                </tr>
+                <tr>
+                    <td>Виниловый пол (линолеум)</td>
+                    <td>Armstrong</td>
+                    <td class="unit-cell">м²</td>
+                    <td class="price-cell">$3.25</td>
+                </tr>
+                <tr>
+                    <td>Плинтус деревянный</td>
+                    <td>Colonial</td>
+                    <td class="unit-cell">пог. м</td>
+                    <td class="price-cell">$1.80</td>
+                </tr>
+            </table>
+
+            <!-- Электрика и сантехника -->
+            <h3 style="font-size:16px; color:#222; margin:12px 0 6px; border-bottom:2px solid #c4a000; padding-bottom:3px;">Электрика и сантехника</h3>
+            <table class="materials-table">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Производитель</th>
+                    <th>Единица</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>Кабель медный 2.5 мм² (NYM)</td>
+                    <td>Southwire</td>
+                    <td class="unit-cell">пог. м</td>
+                    <td class="price-cell">$1.40</td>
+                </tr>
+                <tr>
+                    <td>Розетка с заземлением</td>
+                    <td>Leviton</td>
+                    <td class="unit-cell">шт</td>
+                    <td class="price-cell">$3.50</td>
+                </tr>
+                <tr>
+                    <td>Автоматический выключатель 16А</td>
+                    <td>Square D</td>
+                    <td class="unit-cell">шт</td>
+                    <td class="price-cell">$8.00</td>
+                </tr>
+                <tr>
+                    <td>Труба PEX 16 мм</td>
+                    <td>Uponor</td>
+                    <td class="unit-cell">пог. м</td>
+                    <td class="price-cell">$2.20</td>
+                </tr>
+                <tr>
+                    <td>Смеситель для кухни</td>
+                    <td>Moen</td>
+                    <td class="unit-cell">шт</td>
+                    <td class="price-cell">$89.00</td>
+                </tr>
+                <tr>
+                    <td>Унитаз напольный</td>
+                    <td>Kohler</td>
+                    <td class="unit-cell">шт</td>
+                    <td class="price-cell">$195.00</td>
+                </tr>
+            </table>
+
+            <div class="materials-note">
+                * Цены указаны без учёта налога (8.875% в NYC). Наличие уточняйте по телефону.<br>
+                ** При заказе услуг + материалов — доставка бесплатно, монтаж по прайсу услуг.
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -728,6 +1152,8 @@
         document.getElementById('catalog-wrap').style.display = 'none';
         document.getElementById('big-map-wrap').style.display = 'none';
         document.getElementById('orders-wrap').style.display = 'none';
+        document.getElementById('jobs-wrap').style.display = 'none';
+        document.getElementById('materials-wrap').style.display = 'none';
 
         if (section === 'catalog') {
             document.getElementById('catalog-wrap').style.display = 'block';
@@ -736,6 +1162,10 @@
         } else if (section === 'orders') {
             document.getElementById('orders-wrap').style.display = 'block';
             renderOrders();
+        } else if (section === 'jobs') {
+            document.getElementById('jobs-wrap').style.display = 'block';
+        } else if (section === 'materials') {
+            document.getElementById('materials-wrap').style.display = 'block';
         }
     }
 
