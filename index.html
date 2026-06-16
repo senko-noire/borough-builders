@@ -207,14 +207,13 @@
             font-size: 20px; font-weight: bold; color: #c4a000;
             text-shadow: 1px 1px 1px #000;
         }
-        .service-card .btn, .btn {
+        .service-card .btn {
             background: linear-gradient(to bottom, #4a8a4a, #2a5a2a);
             color: #fff; border: 2px solid #1a3a1a;
             padding: 4px 14px; font-size: 12px; font-weight: bold;
             cursor: pointer; text-decoration: none;
-            display: inline-block;
         }
-        .service-card .btn:hover, .btn:hover {
+        .service-card .btn:hover {
             background: linear-gradient(to bottom, #5a9a5a, #3a6a3a);
         }
 
@@ -278,12 +277,11 @@
         .order-row .order-info .oaddr {
             font-size: 11px; color: #555;
         }
-        .order-row .btn-manage, .btn-manage {
+        .order-row .btn-manage {
             background: linear-gradient(to bottom, #8b3030, #5a1010);
             color: #fff; border: 2px solid #3a0000;
             padding: 3px 12px; font-size: 11px;
             cursor: pointer; text-decoration: none;
-            display: inline-block;
         }
 
         /* Вакансии */
@@ -321,12 +319,11 @@
             font-size: 11px; color: #c4a000; font-weight: bold;
             text-shadow: 1px 1px 1px #000;
         }
-        .job-card .btn-apply, .btn-apply {
+        .job-card .btn-apply {
             background: linear-gradient(to bottom, #4a8a4a, #2a5a2a);
             color: #fff; border: 2px solid #1a3a1a;
             padding: 4px 14px; font-size: 12px; font-weight: bold;
             cursor: pointer; text-decoration: none;
-            display: inline-block;
         }
 
         /* Цены на материалы */
@@ -394,17 +391,39 @@
         .top-actions {
             text-align: right; margin-bottom: 8px;
         }
-        .top-link-btn {
+        .top-actions a, .top-actions button {
+            background: inherit;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .top-actions a {
             background: linear-gradient(to bottom, #c4a000, #a08000);
             color: #fff; padding: 4px 12px; font-size: 12px;
             border: 2px solid #6b5000; text-decoration: none;
-            font-weight: bold; cursor: pointer;
-            display: inline-block;
+            font-weight: bold;
+        }
+    
+        .top-link-btn {
+            background: linear-gradient(to bottom, #c4a000, #a08000);
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 12px;
+            border: 2px solid #6b5000;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: "Times New Roman", serif;
+            cursor: pointer;
         }
         .top-link-btn:hover {
             background: linear-gradient(to bottom, #d4b010, #b09010);
         }
-    </style>
+
+        .top-link-btn, .btn, .btn-manage, .btn-apply {
+            cursor: pointer;
+            display: inline-block;
+        }
+</style>
+<base target="_blank">
 </head>
 <body>
 
@@ -490,10 +509,10 @@
     <div id="content">
 
         <div class="top-actions">
-            <span class="top-link-btn" onclick="showSection('catalog')">« Каталог</span>
-            <span class="top-link-btn" onclick="showSection('jobs')" style="margin-left:4px;">Вакансии</span>
-            <span class="top-link-btn" onclick="showSection('materials')" style="margin-left:4px;">Материалы</span>
-            <span class="top-link-btn" onclick="showSection('orders')" style="margin-left:4px;">Заказы »</span>
+            <span class="top-link-btn" onclick="showSection('catalog'); event.preventDefault(); event.stopPropagation();">« Каталог</span>
+            <span class="top-link-btn" onclick="showSection('jobs'); event.preventDefault(); event.stopPropagation();" style="margin-left:4px;">Вакансии</span>
+            <span class="top-link-btn" onclick="showSection('materials'); event.preventDefault(); event.stopPropagation();" style="margin-left:4px;">Материалы</span>
+            <span class="top-link-btn" onclick="showSection('orders'); event.preventDefault(); event.stopPropagation();" style="margin-left:4px;">Заказы »</span>
         </div>
 
         <!-- КАТАЛОГ УСЛУГ -->
@@ -526,7 +545,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$2,500</span>
-                    <span class="btn" onclick="addOrder('Капитальный ремонт квартиры')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Капитальный ремонт квартиры\')">Заказать »</button>
                 </div>
             </div>
 
@@ -543,7 +562,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$800</span>
-                    <span class="btn" onclick="addOrder('Косметический ремонт')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Косметический ремонт\')">Заказать »</button>
                 </div>
             </div>
 
@@ -560,7 +579,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$4,200</span>
-                    <span class="btn" onclick="addOrder('Ремонт коммерческого помещения')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Ремонт коммерческого помещения\')">Заказать »</button>
                 </div>
             </div>
 
@@ -577,7 +596,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$1,200</span>
-                    <span class="btn" onclick="addOrder('Укладка плитки')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Укладка плитки\')">Заказать »</button>
                 </div>
             </div>
 
@@ -594,7 +613,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$3,500</span>
-                    <span class="btn" onclick="addOrder('Покраска фасада')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Покраска фасада\')">Заказать »</button>
                 </div>
             </div>
 
@@ -611,7 +630,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$1,800</span>
-                    <span class="btn" onclick="addOrder('Замена электропроводки')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Замена электропроводки\')">Заказать »</button>
                 </div>
             </div>
 
@@ -627,7 +646,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$950</span>
-                    <span class="btn" onclick="addOrder('Установка натяжных потолков')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Установка натяжных потолков\')">Заказать »</button>
                 </div>
             </div>
 
@@ -644,7 +663,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$1,400</span>
-                    <span class="btn" onclick="addOrder('Сантехнические работы')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Сантехнические работы\')">Заказать »</button>
                 </div>
             </div>
 
@@ -660,7 +679,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$1,100</span>
-                    <span class="btn" onclick="addOrder('Монтаж гипсокартона')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Монтаж гипсокартона\')">Заказать »</button>
                 </div>
             </div>
 
@@ -676,7 +695,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="price">$1,600</span>
-                    <span class="btn" onclick="addOrder('Укладка ламината / паркета')">Заказать »</span>
+                    <button class="btn" onclick="addOrder(\'Укладка ламината / паркета\')">Заказать »</button>
                 </div>
             </div>
         </div>
@@ -780,25 +799,14 @@
                 <div class="sub">Ваши активные и завершённые заказы</div>
             </div>
 
-            <div class="notice-bar">
-                Выберите объект для управления
-            </div>
-
-            <div id="orders-list">
-                <div class="order-row">
-                    <div class="order-info">
-                        <div class="oname">Капитальный ремонт квартиры</div>
-                        <div class="oaddr">• 452 Atlantic Ave, Apt 3B — 29-й сектор</div>
-                    </div>
-                    <span class="btn-manage" onclick="alert('Управление объектом: Капитальный ремонт квартиры\nАдрес: 452 Atlantic Ave, Apt 3B')">Управлять »</span>
+            <div style="text-align:center; padding:60px 20px;">
+                <div style="font-size:18px; color:#8b0000; font-weight:bold; margin-bottom:12px;">⚠ Сайт перегружен</div>
+                <div style="font-size:14px; color:#555; line-height:1.6;">
+                    Сервер временно недоступен из-за высокой нагрузки.<br>
+                    Попробуйте зайти позже.<br><br>
+                    <span style="font-size:12px; color:#888;">Код ошибки: 503 SERVICE_UNAVAILABLE<br>
+                    BoroughNET v2.1 — uptime 99.2%</span>
                 </div>
-            </div>
-
-            <div style="margin-top:20px; padding:10px; background:#e8e4d8; border:1px dashed #999; font-size:12px; color:#555;">
-                <b>Статусы заказов:</b><br>
-                🟡 В ожидании — заявка принята, ожидается выезд мастера<br>
-                🔵 В работе — бригада на объекте<br>
-                🟢 Завершён — работы выполнены, гарантия действует
             </div>
         </div>
 
@@ -831,7 +839,7 @@
                 </div>
                 <div class="job-footer">
                     <span class="job-badge">Требуется: 3 человека</span>
-                    <span class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.')">Откликнуться »</span>
+                    <button class="btn-apply" onclick="alert(\'Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.\')">Откликнуться »</button>
                 </div>
             </div>
 
@@ -848,7 +856,7 @@
                 </div>
                 <div class="job-footer">
                     <span class="job-badge">Требуется: 2 человека</span>
-                    <span class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.')">Откликнуться »</span>
+                    <button class="btn-apply" onclick="alert(\'Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.\')">Откликнуться »</button>
                 </div>
             </div>
 
@@ -865,7 +873,7 @@
                 </div>
                 <div class="job-footer">
                     <span class="job-badge">Требуется: 1 человек</span>
-                    <span class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.')">Откликнуться »</span>
+                    <button class="btn-apply" onclick="alert(\'Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.\')">Откликнуться »</button>
                 </div>
             </div>
 
@@ -882,7 +890,7 @@
                 </div>
                 <div class="job-footer">
                     <span class="job-badge">Требуется: 2 человека</span>
-                    <span class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.')">Откликнуться »</span>
+                    <button class="btn-apply" onclick="alert(\'Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.\')">Откликнуться »</button>
                 </div>
             </div>
 
@@ -899,7 +907,7 @@
                 </div>
                 <div class="job-footer">
                     <span class="job-badge">Требуется: 1 человек</span>
-                    <span class="btn-apply" onclick="alert('Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.')">Откликнуться »</span>
+                    <button class="btn-apply" onclick="alert(\'Заявка отправлена! Позвоните нам по телефону (718) 627-3155 для собеседования.\')">Откликнуться »</button>
                 </div>
             </div>
 
@@ -1201,17 +1209,15 @@
                 '<div class="oname">' + o.name + '</div>' +
                 '<div class="oaddr">• ' + o.addr + ' — 29-й сектор</div>' +
                 '</div>' +
-                '<span class="btn-manage" onclick="alert(\'Управление объектом: ' + o.name + '\\nАдрес: ' + o.addr + '\')">Управлять »</span>' +
+                '<button class="btn-manage" onclick="alert(\'Управление объектом: ' + o.name + '\nАдрес: ' + o.addr + '\')">Управлять »</button>' +
                 '</div>';
         });
         list.innerHTML = html;
     }
 
     // Мини-карта кликабельна
-    document.getElementById('mini-map').style.cursor = 'pointer';
-    document.getElementById('mini-map').onclick = function() {
-        showSection('map');
-    };
+    // Карта временно недоступна
+    document.getElementById('mini-map').style.cursor = 'default';
 </script>
 
 </body>
