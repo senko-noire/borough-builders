@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Borough Builders Co. — Строительный подрядчик | Brooklyn, NY</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background: #e8e4d8;
+            color: #222;
+            font-size: 14px;
+        }
+        a { color: #8b0000; text-decoration: underline; }
+        a:hover { color: #cc0000; }
+
+        /* Шапка */
+        #header {
+            background: linear-gradient(to bottom, #2a2a2a, #111);
+            border-bottom: 4px solid #c4a000;
+            padding: 12px 20px;
+            color: #fff;
+        }
+        #header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        #logo-icon {
+            width: 48px; height: 48px;
+            background: #8b0000;
+            border: 2px solid #c4a000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: #fff;
+        }
+        #logo-text h1 {
+            font-size: 28px; font-weight: bold; color: #fff;
+            letter-spacing: 1px; text-shadow: 1px 1px 2px #000;
+        }
+        #logo-text .tagline {
+            font-size: 13px; color: #c4a000; font-style: italic;
+        }
+        #logo-text .boroughs {
+            font-size: 11px; color: #aaa; margin-top: 2px;
+        }
+        #header-right {
+            text-align: right;
+        }
+        #header-right .trusted {
+            font-size: 11px; color: #c4a000; font-style: italic;
+        }
+        #header-right .visitors {
+            font-size: 11px; color: #888;
+        }
+
+        /* Жёлтая полоска */
+        #yellow-bar {
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg, #c4a000 0px, #c4a000 12px, #2a2a2a 12px, #2a2a2a 24px
+            );
+        }
+
+        /* Основная сетка */
+        #main-wrap {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-left: 2px solid #999;
+            border-right: 2px solid #999;
+            background: #f5f2e8;
+            min-height: 600px;
+        }
+
+        /* Левая колонка */
+        #sidebar {
+            width: 220px;
+            background: #e0ddd0;
+            border-right: 2px solid #999;
+            padding: 10px;
+        }
+        .sidebar-block {
+            border: 2px solid #666;
+            background: #f0ede3;
+            margin-bottom: 12px;
+        }
+        .sidebar-block h3 {
+            background: linear-gradient(to bottom, #444, #222);
+            color: #fff;
+            font-size: 13px;
+            padding: 6px 8px;
+            border-bottom: 2px solid #c4a000;
+        }
+        .sidebar-block .block-body {
+            padding: 8px;
+            font-size: 12px;
+        }
+        #mini-map {
+            width: 100%; height: 140px;
+            background: #d4d0c0;
+            border: 1px solid #999;
+            position: relative;
+            overflow: hidden;
+        }
+        #mini-map .mm-street-h {
+            position: absolute; height: 6px; background: #bbb;
+        }
+        #mini-map .mm-street-v {
+            position: absolute; width: 6px; background: #bbb;
+        }
+        #mini-map .mm-bld {
+            position: absolute; width: 10px; height: 8px;
+            background: #8b6914; border: 1px solid #554411;
+        }
+        #mini-map .mm-park {
+            position: absolute; background: #7a9a5a;
+        }
+        #mini-map .mm-water {
+            position: absolute; background: #7ab8c8;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+        .sidebar-links li {
+            padding: 4px 0;
+            border-bottom: 1px dotted #999;
+        }
+        .sidebar-links li:before {
+            content: "★ "; color: #c4a000; font-size: 10px;
+        }
+
+        .contact-box {
+            font-size: 12px; color: #333;
+        }
+        .contact-box .co-name {
+            color: #8b0000; font-weight: bold; font-size: 13px;
+        }
+        .contact-box .co-addr {
+            color: #555; margin-top: 4px;
+        }
+
+        /* Правая колонка */
+        #content {
+            flex: 1;
+            padding: 12px;
+        }
+        .content-header {
+            border-bottom: 3px solid #222;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+        }
+        .content-header h2 {
+            font-size: 20px; color: #222; font-weight: bold;
+        }
+        .content-header .sub {
+            font-size: 12px; color: #666; font-style: italic;
+        }
+
+        .notice-bar {
+            background: linear-gradient(to bottom, #a03030, #701010);
+            color: #fff; padding: 6px 10px;
+            font-size: 13px; font-weight: bold;
+            border: 1px solid #500;
+            margin-bottom: 10px;
+        }
+
+        .intro-text {
+            font-size: 13px; color: #333; margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        /* Карточки услуг */
+        .service-card {
+            border: 2px solid #777;
+            background: #f0ede3;
+            margin-bottom: 10px;
+        }
+        .service-card .card-header {
+            background: linear-gradient(to bottom, #ddd, #bbb);
+            padding: 5px 10px;
+            border-bottom: 1px solid #999;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .service-card .card-header h4 {
+            font-size: 15px; color: #222; font-weight: bold;
+        }
+        .service-card .card-header .card-addr {
+            font-size: 11px; color: #555;
+        }
+        .service-card .card-body {
+            padding: 8px 10px;
+            font-size: 12px; color: #333; line-height: 1.4;
+        }
+        .service-card .card-footer {
+            background: linear-gradient(to bottom, #333, #111);
+            padding: 6px 10px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-top: 1px solid #555;
+        }
+        .service-card .price {
+            font-size: 20px; font-weight: bold; color: #c4a000;
+            text-shadow: 1px 1px 1px #000;
+        }
+        .service-card .btn {
+            background: linear-gradient(to bottom, #4a8a4a, #2a5a2a);
+            color: #fff; border: 2px solid #1a3a1a;
+            padding: 4px 14px; font-size: 12px; font-weight: bold;
+            cursor: pointer; text-decoration: none;
+        }
+        .service-card .btn:hover {
+            background: linear-gradient(to bottom, #5a9a5a, #3a6a3a);
+        }
+
+        /* Карта (большая) */
+        #big-map-wrap {
+            display: none;
+            border: 2px solid #666;
+            background: #e0ddd0;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+        #big-map {
+            width: 100%; height: 420px;
+            background: #d8d4c4;
+            position: relative;
+            border: 2px solid #999;
+            overflow: hidden;
+        }
+        .bm-street {
+            position: absolute; background: #eee;
+            border: 1px solid #bbb;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; color: #555; font-family: Arial, sans-serif;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .bm-street.h { height: 18px; }
+        .bm-street.v { width: 18px; }
+        .bm-bld {
+            position: absolute;
+            background: #a08040; border: 1px solid #665020;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 10px; color: #fff; text-shadow: 1px 1px 0 #000;
+        }
+        .bm-bld.res { background: #8b6914; }
+        .bm-bld.com { background: #6b6b8b; }
+        .bm-bld.ind { background: #6b4a3a; }
+        .bm-park { position: absolute; background: #6a9a4a; }
+        .bm-water { position: absolute; background: #7ab8c8; }
+        .bm-site { position: absolute; background: #c4a000; border: 2px dashed #8b0000; }
+        .bm-label {
+            position: absolute; font-size: 9px; color: #333;
+            font-family: Arial, sans-serif; background: rgba(255,255,255,0.7);
+            padding: 1px 3px;
+        }
+
+        /* Управление заказами */
+        #orders-wrap {
+            display: none;
+        }
+        .order-row {
+            border: 1px solid #999; background: #f0ede3;
+            margin-bottom: 6px; padding: 8px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .order-row .order-info {
+            font-size: 13px;
+        }
+        .order-row .order-info .oname {
+            font-weight: bold; color: #222; font-size: 14px;
+        }
+        .order-row .order-info .oaddr {
+            font-size: 11px; color: #555;
+        }
+        .order-row .btn-manage {
+            background: linear-gradient(to bottom, #8b3030, #5a1010);
+            color: #fff; border: 2px solid #3a0000;
+            padding: 3px 12px; font-size: 11px;
+            cursor: pointer; text-decoration: none;
+        }
+
+        /* Подвал */
+        #footer {
+            max-width: 1100px; margin: 0 auto;
+            padding: 8px; font-size: 11px; color: #666;
+            text-align: center; border-top: 1px solid #999;
+        }
+
+        /* Кнопки навигации */
+        .nav-btn {
+            background: linear-gradient(to bottom, #ddd, #bbb);
+            border: 2px solid #777; padding: 4px 10px;
+            font-size: 12px; cursor: pointer; margin-right: 4px;
+            font-family: "Times New Roman", serif;
+        }
+        .nav-btn:hover { background: #ccc; }
+        .nav-btn.active {
+            background: linear-gradient(to bottom, #c4a000, #a08000);
+            color: #fff; border-color: #6b5000;
+        }
+
+        .top-actions {
+            text-align: right; margin-bottom: 8px;
+        }
+        .top-actions a {
+            background: linear-gradient(to bottom, #c4a000, #a08000);
+            color: #fff; padding: 4px 12px; font-size: 12px;
+            border: 2px solid #6b5000; text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<div id="header">
+    <div id="header-top">
+        <div id="logo-area">
+            <div id="logo-icon">🏗</div>
+            <div id="logo-text">
+                <h1>Borough Builders Co.</h1>
+                <div class="tagline">• Brooklyn, NY •</div>
+                <div class="boroughs">Manhattan · Brooklyn · Queens · The Bronx · Staten Island</div>
+            </div>
+        </div>
+        <div id="header-right">
+            <div class="trusted">Trusted Since 1987</div>
+            <div class="visitors">Посетителей сегодня: 847</div>
+        </div>
+    </div>
+</div>
+<div id="yellow-bar"></div>
+
+<!-- ОСНОВНОЙ КОНТЕНТ -->
+<div id="main-wrap">
+
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div id="sidebar">
+        <div class="sidebar-block">
+            <h3>» Карта района</h3>
+            <div class="block-body">
+                <div id="mini-map">
+                    <div class="mm-street-h" style="top:30px;left:10px;width:180px;"></div>
+                    <div class="mm-street-h" style="top:70px;left:10px;width:180px;"></div>
+                    <div class="mm-street-h" style="top:110px;left:10px;width:180px;"></div>
+                    <div class="mm-street-v" style="top:10px;left:50px;height:120px;"></div>
+                    <div class="mm-street-v" style="top:10px;left:100px;height:120px;"></div>
+                    <div class="mm-street-v" style="top:10px;left:150px;height:120px;"></div>
+                    <div class="mm-bld" style="top:35px;left:55px;"></div>
+                    <div class="mm-bld" style="top:35px;left:105px;"></div>
+                    <div class="mm-bld" style="top:75px;left:55px;"></div>
+                    <div class="mm-bld" style="top:75px;left:155px;"></div>
+                    <div class="mm-park" style="top:10px;left:10px;width:35px;height:50px;"></div>
+                    <div class="mm-water" style="bottom:0;left:0;width:100%;height:25px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-block">
+            <h3>» Наши гарантии</h3>
+            <div class="block-body">
+                <ul class="sidebar-links">
+                    <li>Качественные материалы</li>
+                    <li>Соблюдение сроков</li>
+                    <li>Лицензия и страховка</li>
+                    <li>Бесплатная консультация</li>
+                    <li>Гарантия 2 года</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sidebar-block">
+            <h3>» Контакты</h3>
+            <div class="block-body">
+                <div class="contact-box">
+                    <div class="co-name">Borough Builders Co.</div>
+                    <div class="co-addr">
+                        452 Atlantic Ave<br>
+                        Brooklyn, NY 11217<br><br>
+                        Тел: (718) 627-3155<br>
+                        Факс: (718) 321-1246<br>
+                        Email: info@boroughbuilders.net
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align:center; font-size:10px; color:#888; margin-top:20px;">
+            [ Powered by BoroughNET v2.1 ]
+        </div>
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div id="content">
+
+        <div class="top-actions">
+            <a href="#" onclick="showSection('catalog');return false;">« Каталог услуг</a>
+            <a href="#" onclick="showSection('orders');return false;" style="margin-left:6px;">Управление заказами »</a>
+        </div>
+
+        <!-- КАТАЛОГ УСЛУГ -->
+        <div id="catalog-wrap">
+            <div class="content-header">
+                <h2>Каталог услуг</h2>
+                <div class="sub">Полный спектр строительных и отделочных работ от Borough Builders</div>
+            </div>
+
+            <div class="notice-bar">
+                Работаем ежедневно с 7:00 до 19:00 — выезд на объект в течение 24 часов
+            </div>
+
+            <div class="intro-text">
+                Ниже представлены доступные услуги по ремонту и отделке жилых и коммерческих помещений. 
+                Откройте карту слева, чтобы выбрать район, либо просмотрите весь каталог ниже. 
+                Для жителей 29-го сектора Бруклина — специальные условия.
+            </div>
+
+            <!-- Услуга 1 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Капитальный ремонт квартиры</h4>
+                    <span class="card-addr">• Любой адрес в секторе</span>
+                </div>
+                <div class="card-body">
+                    Полная замена инженерных коммуникаций, штукатурка, шпаклёвка, покраска стен и потолков. 
+                    Укладка нового напольного покрытия (ламинат, паркет, плитка). Замена окон и дверей. 
+                    Работаем с материалами заказчика или подберём сами.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$2,500</span>
+                    <a href="#" class="btn" onclick="addOrder('Капитальный ремонт квартиры');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 2 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Косметический ремонт</h4>
+                    <span class="card-addr">• Любой адрес в секторе</span>
+                </div>
+                <div class="card-body">
+                    Покраска стен и потолков, оклейка обоями, замена плинтусов и розеток. 
+                    Быстро и аккуратно — идеально для сдачи жилья в аренду или перед продажей. 
+                    Срок выполнения — от 3 дней.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$800</span>
+                    <a href="#" class="btn" onclick="addOrder('Косметический ремонт');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 3 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Ремонт коммерческого помещения</h4>
+                    <span class="card-addr">• Магазины, офисы, склады</span>
+                </div>
+                <div class="card-body">
+                    Отделка под магазин, офис или складское помещение. Установка перегородок, 
+                    подвесных потолков, систем вентиляции. Электромонтаж под коммерческие нагрузки. 
+                    Все работы согласованы с Департаментом строительства NYC.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$4,200</span>
+                    <a href="#" class="btn" onclick="addOrder('Ремонт коммерческого помещения');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 4 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Укладка плитки</h4>
+                    <span class="card-addr">• Ванная, кухня, подъезд</span>
+                </div>
+                <div class="card-body">
+                    Профессиональная укладка керамической, кафельной и мозаичной плитки. 
+                    Подготовка основания, гидроизоляция, затирка швов. 
+                    Работаем с плиткой любого формата — от классики до современных решений.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$1,200</span>
+                    <a href="#" class="btn" onclick="addOrder('Укладка плитки');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 5 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Покраска фасада</h4>
+                    <span class="card-addr">• Жилые дома, таунхаусы</span>
+                </div>
+                <div class="card-body">
+                    Мойка, грунтовка и покраска фасадов зданий. Работа на высоте с соблюдением техники безопасности. 
+                    Используем фасадные краски, устойчивые к погодным условиям Нью-Йорка. 
+                    Подберём цвет по каталогу Benjamin Moore.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$3,500</span>
+                    <a href="#" class="btn" onclick="addOrder('Покраска фасада');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 6 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Замена электропроводки</h4>
+                    <span class="card-addr">• Полная или частичная замена</span>
+                </div>
+                <div class="card-body">
+                    Демонтаж старой проводки, прокладка новых кабелей, установка щитков, автоматов и розеток. 
+                    Работаем по стандартам NEC (National Electrical Code). 
+                    Выдаём акты для страховых компаний и управляющих компаний.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$1,800</span>
+                    <a href="#" class="btn" onclick="addOrder('Замена электропроводки');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 7 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Установка натяжных потолков</h4>
+                    <span class="card-addr">• Квартиры, офисы, магазины</span>
+                </div>
+                <div class="card-body">
+                    Монтаж натяжных потолков ПВХ и тканевых. Скрытая подсветка, многоуровневые конструкции. 
+                    Быстрый монтаж без пыли и грязи. Гарантия на полотно — 10 лет.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$950</span>
+                    <a href="#" class="btn" onclick="addOrder('Установка натяжных потолков');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 8 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Сантехнические работы</h4>
+                    <span class="card-addr">• Замена труб, сантехники</span>
+                </div>
+                <div class="card-body">
+                    Замена стояков, разводка труб горячего и холодного водоснабжения. 
+                    Установка ванн, душевых кабин, унитазов, раковин и смесителей. 
+                    Исправление протечек и засоров. Работаем с медью, PEX и полипропиленом.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$1,400</span>
+                    <a href="#" class="btn" onclick="addOrder('Сантехнические работы');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 9 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Монтаж гипсокартона</h4>
+                    <span class="card-addr">• Перегородки, потолки, арки</span>
+                </div>
+                <div class="card-body">
+                    Создание перегородок, коробов, многоуровневых потолков и декоративных арок из ГКЛ. 
+                    Шпаклёвка под покраску или обои. Звукоизоляция перегородок минватой.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$1,100</span>
+                    <a href="#" class="btn" onclick="addOrder('Монтаж гипсокартона');return false;">Заказать »</a>
+                </div>
+            </div>
+
+            <!-- Услуга 10 -->
+            <div class="service-card">
+                <div class="card-header">
+                    <h4>Укладка ламината / паркета</h4>
+                    <span class="card-addr">• Жилые помещения</span>
+                </div>
+                <div class="card-body">
+                    Подготовка основания (стяжка, фанера), укладка ламината, паркетной доски или инженерной доски. 
+                    Монтаж плинтусов и порожков. Шлифовка и лакировка натурального паркета.
+                </div>
+                <div class="card-footer">
+                    <span class="price">$1,600</span>
+                    <a href="#" class="btn" onclick="addOrder('Укладка ламината / паркета');return false;">Заказать »</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- БОЛЬШАЯ КАРТА -->
+        <div id="big-map-wrap">
+            <div class="content-header">
+                <h2>Карта объектов — выберите район</h2>
+                <div class="sub">Активные строительные площадки и завершённые объекты Borough Builders</div>
+            </div>
+            <div style="text-align:right; margin-bottom:6px;">
+                <button class="nav-btn" onclick="showSection('catalog')">× Закрыть карту</button>
+            </div>
+            <div id="big-map">
+                <!-- Улицы горизонтальные -->
+                <div class="bm-street h" style="top:40px;left:20px;width:640px;">Atlantic Ave</div>
+                <div class="bm-street h" style="top:100px;left:20px;width:640px;">Pacific St</div>
+                <div class="bm-street h" style="top:160px;left:20px;width:640px;">Dean St</div>
+                <div class="bm-street h" style="top:220px;left:20px;width:640px;">Bergen St</div>
+                <div class="bm-street h" style="top:280px;left:20px;width:640px;">St Marks Ave</div>
+                <div class="bm-street h" style="top:340px;left:20px;width:640px;">Prospect Pl</div>
+
+                <!-- Улицы вертикальные -->
+                <div class="bm-street v" style="top:20px;left:60px;height:360px;">Flatbush Ave</div>
+                <div class="bm-street v" style="top:20px;left:160px;height:360px;">5th Ave</div>
+                <div class="bm-street v" style="top:20px;left:260px;height:360px;">6th Ave</div>
+                <div class="bm-street v" style="top:20px;left:360px;height:360px;">7th Ave</div>
+                <div class="bm-street v" style="top:20px;left:460px;height:360px;">8th Ave</div>
+                <div class="bm-street v" style="top:20px;left:560px;height:360px;">9th Ave</div>
+
+                <!-- Парк -->
+                <div class="bm-park" style="top:20px;left:20px;width:35px;height:70px;"></div>
+                <div class="bm-park" style="top:250px;left:460px;width:80px;height:60px;"></div>
+
+                <!-- Вода -->
+                <div class="bm-water" style="bottom:0;left:0;width:100%;height:40px;"></div>
+
+                <!-- Здания жилые -->
+                <div class="bm-bld res" style="top:50px;left:70px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:110px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:170px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:270px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:370px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:470px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:50px;left:570px;width:30px;height:20px;"></div>
+
+                <div class="bm-bld res" style="top:110px;left:70px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:110px;left:170px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:110px;left:270px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:110px;left:370px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:110px;left:470px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:110px;left:570px;width:30px;height:20px;"></div>
+
+                <div class="bm-bld res" style="top:170px;left:70px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:170px;left:170px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:170px;left:270px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:170px;left:370px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:170px;left:470px;width:30px;height:20px;"></div>
+
+                <div class="bm-bld res" style="top:230px;left:70px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:230px;left:170px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:230px;left:270px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:230px;left:370px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:230px;left:570px;width:30px;height:20px;"></div>
+
+                <div class="bm-bld res" style="top:290px;left:70px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:290px;left:170px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:290px;left:370px;width:30px;height:20px;"></div>
+                <div class="bm-bld res" style="top:290px;left:570px;width:30px;height:20px;"></div>
+
+                <!-- Коммерческие -->
+                <div class="bm-bld com" style="top:50px;left:210px;width:40px;height:25px;">OFF</div>
+                <div class="bm-bld com" style="top:110px;left:310px;width:40px;height:25px;">SHOP</div>
+                <div class="bm-bld com" style="top:170px;left:510px;width:40px;height:25px;">STORE</div>
+                <div class="bm-bld com" style="top:230px;left:310px;width:40px;height:25px;">CAFE</div>
+                <div class="bm-bld com" style="top:290px;left:510px;width:40px;height:25px;">GYM</div>
+
+                <!-- Индустриальные -->
+                <div class="bm-bld ind" style="top:50px;left:510px;width:45px;height:30px;">WH</div>
+                <div class="bm-bld ind" style="top:290px;left:270px;width:45px;height:30px;">GAR</div>
+
+                <!-- Строительные площадки -->
+                <div class="bm-site" style="top:110px;left:110px;width:40px;height:30px;" title="Текущий объект"></div>
+                <div class="bm-site" style="top:230px;left:470px;width:40px;height:30px;" title="Текущий объект"></div>
+                <div class="bm-site" style="top:290px;left:110px;width:40px;height:30px;" title="Текущий объект"></div>
+
+                <!-- Метка офиса -->
+                <div style="position:absolute;top:42px;left:22px;width:14px;height:14px;background:#c4a000;border:2px solid #8b0000;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#000;font-weight:bold;">★</div>
+                <div class="bm-label" style="top:28px;left:38px;">Наш офис</div>
+
+                <div class="bm-label" style="top:115px;left:112px;color:#8b0000;font-weight:bold;">Ремонт</div>
+                <div class="bm-label" style="top:235px;left:472px;color:#8b0000;font-weight:bold;">Отделка</div>
+                <div class="bm-label" style="top:295px;left:112px;color:#8b0000;font-weight:bold;">Стройка</div>
+            </div>
+        </div>
+
+        <!-- УПРАВЛЕНИЕ ЗАКАЗАМИ -->
+        <div id="orders-wrap">
+            <div class="content-header">
+                <h2>Управление заказами</h2>
+                <div class="sub">Ваши активные и завершённые заказы</div>
+            </div>
+
+            <div class="notice-bar">
+                Выберите объект для управления
+            </div>
+
+            <div id="orders-list">
+                <div class="order-row">
+                    <div class="order-info">
+                        <div class="oname">Капитальный ремонт квартиры</div>
+                        <div class="oaddr">• 452 Atlantic Ave, Apt 3B — 29-й сектор</div>
+                    </div>
+                    <a href="#" class="btn-manage">Управлять »</a>
+                </div>
+            </div>
+
+            <div style="margin-top:20px; padding:10px; background:#e8e4d8; border:1px dashed #999; font-size:12px; color:#555;">
+                <b>Статусы заказов:</b><br>
+                🟡 В ожидании — заявка принята, ожидается выезд мастера<br>
+                🔵 В работе — бригада на объекте<br>
+                🟢 Завершён — работы выполнены, гарантия действует
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ПОДВАЛ -->
+<div id="footer">
+    Borough Builders Co. — Строительный подрядчик Бруклина с 1987 года<br>
+    Лицензия NYC Department of Buildings #BC-45217 | Страховка до $2,000,000<br>
+    <span style="color:#999;">[ Powered by BoroughNET v2.1 ]</span>
+</div>
+
+<script>
+    let orders = [
+        { name: "Капитальный ремонт квартиры", addr: "452 Atlantic Ave, Apt 3B" }
+    ];
+
+    function showSection(section) {
+        document.getElementById('catalog-wrap').style.display = 'none';
+        document.getElementById('big-map-wrap').style.display = 'none';
+        document.getElementById('orders-wrap').style.display = 'none';
+
+        if (section === 'catalog') {
+            document.getElementById('catalog-wrap').style.display = 'block';
+        } else if (section === 'map') {
+            document.getElementById('big-map-wrap').style.display = 'block';
+        } else if (section === 'orders') {
+            document.getElementById('orders-wrap').style.display = 'block';
+            renderOrders();
+        }
+    }
+
+    function addOrder(serviceName) {
+        const addresses = [
+            "14 Dean St, Apt 2A",
+            "88 Bergen St, Apt 5C",
+            "203 Pacific St, Storefront",
+            "67 St Marks Ave, Apt 1D",
+            "401 Atlantic Ave, Office 302"
+        ];
+        const addr = addresses[Math.floor(Math.random() * addresses.length)];
+        orders.push({ name: serviceName, addr: addr });
+        alert('Заказ принят: ' + serviceName + '\nАдрес: ' + addr + '\n\nПерейдите в раздел "Управление заказами" для отслеживания.');
+    }
+
+    function renderOrders() {
+        const list = document.getElementById('orders-list');
+        if (orders.length === 0) {
+            list.innerHTML = '<div style="padding:20px;text-align:center;color:#666;">У вас пока нет активных заказов.</div>';
+            return;
+        }
+        let html = '';
+        orders.forEach((o, i) => {
+            html += '<div class="order-row">' +
+                '<div class="order-info">' +
+                '<div class="oname">' + o.name + '</div>' +
+                '<div class="oaddr">• ' + o.addr + ' — 29-й сектор</div>' +
+                '</div>' +
+                '<a href="#" class="btn-manage" onclick="alert('Управление объектом: ' + o.name + '\nАдрес: ' + o.addr + '');return false;">Управлять »</a>' +
+                '</div>';
+        });
+        list.innerHTML = html;
+    }
+
+    // Мини-карта кликабельна
+    document.getElementById('mini-map').style.cursor = 'pointer';
+    document.getElementById('mini-map').onclick = function() {
+        showSection('map');
+    };
+</script>
+
+</body>
+</html>
