@@ -2,10 +2,208 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Borough Builders Co. — Строительный подрядчик | Brooklyn, NY</title>
+    <title>BoroughNET Explorer</title>
     <style>
+
+/* Windows 98 Browser Shell */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    width: 100%; height: 100%;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 11px;
+    background: #008080;
+    overflow: hidden;
+}
+
+#desktop {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #008080 0%, #006060 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#browser-window {
+    width: 100%;
+    max-width: 1150px;
+    height: 95vh;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #000 #000 #dfdfdf;
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title Bar */
+#browser-titlebar {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #fff;
+    padding: 3px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: default;
+    user-select: none;
+}
+#browser-titlebar .title-left {
+    display: flex; align-items: center; gap: 6px;
+}
+#browser-titlebar .win-icon {
+    width: 16px; height: 16px; background: #c4a000;
+    border: 1px solid #fff; display: flex; align-items: center;
+    justify-content: center; font-size: 10px;
+}
+#browser-titlebar .title-text {
+    letter-spacing: 0.5px;
+}
+#browser-titlebar .title-btns {
+    display: flex; gap: 2px;
+}
+#browser-titlebar .title-btn {
+    width: 16px; height: 14px;
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #000 #000 #fff;
+    display: flex; align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: #000;
+    cursor: pointer;
+}
+#browser-titlebar .title-btn:hover {
+    background: #d4d0c8;
+}
+
+/* Menu Bar */
+#browser-menubar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 6px;
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+}
+#browser-menubar span {
+    cursor: pointer;
+    padding: 1px 4px;
+}
+#browser-menubar span:hover {
+    background: #000080;
+    color: #fff;
+}
+
+/* Toolbar */
+#browser-toolbar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+#browser-toolbar button {
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #000 #000 #fff;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    cursor: pointer;
+}
+#browser-toolbar button:hover {
+    background: #d4d0c8;
+}
+#browser-toolbar button:disabled {
+    color: #808080;
+    cursor: default;
+}
+#browser-toolbar .sep {
+    width: 1px; height: 20px; background: #808080;
+    border-right: 1px solid #fff;
+}
+
+/* Address Bar */
+#browser-addressbar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+#browser-addressbar label {
+    font-size: 11px;
+    white-space: nowrap;
+}
+#browser-addressbar #address-input {
+    flex: 1;
+    background: #fff;
+    border: 1px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+}
+#browser-addressbar #go-btn {
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #000 #000 #fff;
+    padding: 2px 12px;
+    font-size: 11px;
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+/* Content Area */
+#browser-content {
+    flex: 1;
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #fff #fff #808080;
+    margin: 2px;
+    overflow: auto;
+    position: relative;
+}
+
+/* Status Bar */
+#browser-statusbar {
+    background: #c0c0c0;
+    border-top: 1px solid #dfdfdf;
+    padding: 2px 6px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #000;
+}
+#browser-statusbar .status-left {
+    display: flex; gap: 12px;
+}
+#browser-statusbar .status-box {
+    border: 1px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 1px 6px;
+    min-width: 120px;
+}
+#browser-statusbar .status-right {
+    display: flex; gap: 4px;
+}
+#browser-statusbar .status-icon {
+    width: 16px; height: 14px;
+    border: 1px solid;
+    border-color: #fff #000 #000 #fff;
+    display: flex; align-items: center;
+    justify-content: center;
+    font-size: 9px;
+}
+
+/* ===== BOROUGH BUILDERS SCOPED CSS ===== */
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
+        #borough-content {
             font-family: "Times New Roman", Times, serif;
             background: #e8e4d8;
             color: #222;
@@ -96,7 +294,7 @@
             padding: 6px 8px;
             border-bottom: 2px solid #c4a000;
         }
-        .sidebar-block .block-body {
+        .sidebar-block .block-#borough-content {
             padding: 8px;
             font-size: 12px;
         }
@@ -193,7 +391,7 @@
         .service-card .card-header .card-addr {
             font-size: 11px; color: #555;
         }
-        .service-card .card-body {
+        .service-card .card-#borough-content {
             padding: 8px 10px;
             font-size: 12px; color: #333; line-height: 1.4;
         }
@@ -305,7 +503,7 @@
         .job-card .job-header .job-pay {
             font-size: 13px; color: #8b0000; font-weight: bold;
         }
-        .job-card .job-body {
+        .job-card .job-#borough-content {
             padding: 8px 10px;
             font-size: 12px; color: #333; line-height: 1.4;
         }
@@ -422,12 +620,187 @@
             cursor: pointer;
             display: inline-block;
         }
-</style>
-<base target="_blank">
-<base target="_blank">
+
+    </style>
 <base target="_blank">
 </head>
 <body>
+<div id="desktop">
+<div id="browser-window">
+    <div id="browser-titlebar">
+        <div class="title-left">
+            <div class="win-icon">🌐</div>
+            <span class="title-text">BoroughNET Explorer — Borough Builders Co.</span>
+        </div>
+        <div class="title-btns">
+            <div class="title-btn">_</div>
+            <div class="title-btn">□</div>
+            <div class="title-btn" style="background:#c0c0c0;">×</div>
+        </div>
+    </div>
+
+    <div id="browser-menubar">
+        <span><u>Ф</u>айл</span>
+        <span><u>П</u>равка</span>
+        <span><u>В</u>ид</span>
+        <span><u>И</u>збранное</span>
+        <span><u>С</u>ервис</span>
+        <span><u>С</u>правка</span>
+    </div>
+
+    <div id="browser-toolbar">
+        <button onclick="goBack()" id="btn-back" disabled>◀ Назад</button>
+        <button onclick="goForward()" id="btn-forward" disabled>▶ Вперёд</button>
+        <button onclick="goHome()">🏠 Домой</button>
+        <div class="sep"></div>
+        <button onclick="refreshPage()">🔄 Обновить</button>
+        <button onclick="stopLoading()">⛔ Стоп</button>
+        <div class="sep"></div>
+        <button onclick="alert('История посещений пуста')">📜 История</button>
+    </div>
+
+    <div id="browser-addressbar">
+        <label><b>Адрес:</b></label>
+        <input type="text" id="address-input" value="http://homepage.boroughnet.net" readonly>
+        <button id="go-btn" onclick="goToAddress()">Перейти</button>
+    </div>
+
+    <div id="browser-content">
+<div id="homepage" style="display:block;">
+<div style="background:#fff; padding:20px; min-height:500px; font-family:'Times New Roman',Times,serif;">
+    <div style="text-align:center; margin-bottom:20px;">
+        <div style="font-size:32px; color:#000080; font-weight:bold; margin-bottom:4px;">BoroughNET</div>
+        <div style="font-size:13px; color:#666;">Ваш провайдер интернета в Бруклине с 1996 года</div>
+        <div style="margin-top:8px; font-size:11px; color:#888;">Добро пожаловать, гость | IP: 192.168.1.105 | Скорость: 56K</div>
+    </div>
+
+    <div style="display:flex; gap:20px;">
+        <div style="width:200px; border:2px solid #999; background:#f0f0f0; padding:10px;">
+            <div style="background:#000080; color:#fff; padding:4px 6px; font-size:12px; font-weight:bold; margin-bottom:8px;">☰ Избранное</div>
+            <div style="font-size:12px; line-height:1.8;">
+                <a href="#" onclick="goError('http://www.ny1.com');return false;" style="color:#000080;">📺 NY1 News</a><br>
+                <a href="#" onclick="goError('http://www.nytimes.com');return false;" style="color:#000080;">📰 New York Times</a><br>
+                <a href="#" onclick="goError('http://www.mta.nyc.ny.us');return false;" style="color:#000080;">🚇 MTA NYC</a><br>
+                <a href="#" onclick="goError('http://www.nyc.gov');return false;" style="color:#000080;">🏛️ NYC.gov</a><br>
+                <a href="#" onclick="goError('http://www.nyc.gov/nypd');return false;" style="color:#000080;">🚔 NYPD</a><br>
+                <a href="#" onclick="goError('http://www.nyc.gov/fdny');return false;" style="color:#000080;">🚒 FDNY</a><br>
+                <a href="#" onclick="goError('http://www.coned.com');return false;" style="color:#000080;">⚡ Con Edison</a><br>
+                <a href="#" onclick="goError('http://www.verizon.com');return false;" style="color:#000080;">📞 Verizon</a><br>
+                <a href="#" onclick="goError('http://www.hotmail.com');return false;" style="color:#000080;">✉️ Hotmail</a><br>
+                <a href="#" onclick="goError('http://www.aol.com');return false;" style="color:#000080;">⭐ AOL</a><br>
+                <a href="#" onclick="goError('http://www.yahoo.com');return false;" style="color:#000080;">🔍 Yahoo!</a><br>
+                <a href="#" onclick="goError('http://www.ebay.com');return false;" style="color:#000080;">🏷️ eBay</a><br>
+                <a href="#" onclick="goError('http://www.amazon.com');return false;" style="color:#000080;">📦 Amazon</a><br>
+                <a href="#" onclick="goError('http://newyork.craigslist.org');return false;" style="color:#000080;">📋 Craigslist NYC</a><br>
+                <a href="#" onclick="goError('http://www.mapquest.com');return false;" style="color:#000080;">🗺️ MapQuest</a><br>
+            </div>
+            <div style="margin-top:12px; border-top:1px solid #999; padding-top:8px;">
+                <div style="background:#8b0000; color:#fff; padding:4px 6px; font-size:12px; font-weight:bold; margin-bottom:6px;">🏗️ Работа</div>
+                <a href="#" onclick="loadBorough();return false;" style="color:#8b0000; font-weight:bold; font-size:13px;">► Borough Builders Co.</a><br>
+                <span style="font-size:10px; color:#666;">Строительный подрядчик Бруклина</span>
+            </div>
+        </div>
+
+        <div style="flex:1;">
+            <div style="border:2px solid #999; background:#f0f0f0; padding:10px; margin-bottom:12px;">
+                <div style="background:#000080; color:#fff; padding:4px 6px; font-size:12px; font-weight:bold; margin-bottom:8px;">📰 Новости Нью-Йорка</div>
+                <div style="font-size:12px; line-height:1.6;">
+                    <div style="border-bottom:1px dotted #999; padding-bottom:6px; margin-bottom:6px;">
+                        <b style="color:#000080;">Мэр объявил о ремонте моста Бруклин</b><br>
+                        <span style="color:#666; font-size:11px;">Сегодня, 10:34 | NY1</span><br>
+                        <span style="color:#333;">Работы начнутся в следующем месяце, движение будет ограничено.</span>
+                    </div>
+                    <div style="border-bottom:1px dotted #999; padding-bottom:6px; margin-bottom:6px;">
+                        <b style="color:#000080;">Новая линия метро на Atlantic Avenue</b><br>
+                        <span style="color:#666; font-size:11px;">Вчера, 16:22 | MTA</span><br>
+                        <span style="color:#333;">Проект получил финансирование в размере $340 млн.</span>
+                    </div>
+                    <div style="border-bottom:1px dotted #999; padding-bottom:6px; margin-bottom:6px;">
+                        <b style="color:#000080;">Жара в NYC: рекорд +38°C</b><br>
+                        <span style="color:#666; font-size:11px;">Вчера, 09:15 | Weather Channel</span><br>
+                        <span style="color:#333;">Con Edison просит жителей экономить электроэнергию.</span>
+                    </div>
+                    <div>
+                        <b style="color:#000080;">Бейсбол: Yankees vs Mets</b><br>
+                        <span style="color:#666; font-size:11px;">Сегодня, 08:00 | ESPN</span><br>
+                        <span style="color:#333;">Субботний матч на Yankee Stadium — билеты ещё есть.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="border:2px solid #999; background:#f0f0f0; padding:10px; margin-bottom:12px;">
+                <div style="background:#000080; color:#fff; padding:4px 6px; font-size:12px; font-weight:bold; margin-bottom:8px;">🌐 Популярные сайты</div>
+                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                    <a href="#" onclick="goError('http://www.nytimes.com');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">📰</div>
+                        <div>NY Times</div>
+                    </a>
+                    <a href="#" onclick="goError('http://www.mta.nyc.ny.us');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">🚇</div>
+                        <div>MTA NYC</div>
+                    </a>
+                    <a href="#" onclick="goError('http://www.hotmail.com');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">✉️</div>
+                        <div>Hotmail</div>
+                    </a>
+                    <a href="#" onclick="goError('http://www.ebay.com');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">🏷️</div>
+                        <div>eBay</div>
+                    </a>
+                    <a href="#" onclick="goError('http://www.amazon.com');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">📦</div>
+                        <div>Amazon</div>
+                    </a>
+                    <a href="#" onclick="goError('http://newyork.craigslist.org');return false;" style="display:block; width:120px; border:1px solid #999; background:#fff; padding:6px; text-align:center; font-size:11px; color:#000080; text-decoration:none;">
+                        <div style="font-size:20px;">📋</div>
+                        <div>Craigslist</div>
+                    </a>
+                </div>
+            </div>
+
+            <div style="border:2px solid #999; background:#f0f0f0; padding:10px;">
+                <div style="background:#000080; color:#fff; padding:4px 6px; font-size:12px; font-weight:bold; margin-bottom:8px;">⚠️ Объявления</div>
+                <div style="font-size:12px; color:#333; line-height:1.5;">
+                    <b style="color:#8b0000;">ПРОДАМ:</b> Б/у шуруповёрт Black & Decker, $45. Тел. (718) 555-0142<br><br>
+                    <b style="color:#8b0000;">СДАМ:</b> Комната на Bergen St, $650/мес. Без животных. (718) 555-0199<br><br>
+                    <b style="color:#8b0000;">ИЩУ РАБОТУ:</b> Опытный плиточник, 10 лет опыта. (718) 555-0234<br><br>
+                    <b style="color:#8b0000;">УСЛУГИ:</b> Перевозка мебели, box truck, $40/час. (718) 555-0176
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:20px; font-size:11px; color:#888;">
+        BoroughNET Internet Services © 1996-2005 | Техподдержка: (718) 555-0100<br>
+        <span style="color:#aaa;">Нажмите F1 для справки | Справочник абонента v3.2</span>
+    </div>
+</div>
+</div>
+<div id="errorpage" style="display:none;">
+<div style="background:#fff; padding:40px; min-height:500px; font-family:'Times New Roman',Times,serif; text-align:center;">
+    <div style="font-size:48px; margin-bottom:20px;">❌</div>
+    <div style="font-size:18px; color:#000; font-weight:bold; margin-bottom:12px;">Невозможно отобразить страницу</div>
+    <div style="font-size:13px; color:#333; line-height:1.6; margin-bottom:20px;">
+        Страница, которую вы ищете, в данный момент недоступна.<br>
+        Возможные причины:<br>
+        • Сайт временно не работает<br>
+        • Превышено время ожидания ответа от сервера<br>
+        • Нет подключения к интернету<br>
+        • Сервер не найден
+    </div>
+    <div id="error-url" style="font-size:12px; color:#666; margin-bottom:20px; font-family:monospace; background:#f0f0f0; padding:8px; border:1px solid #ccc; display:inline-block;"></div>
+    <div style="margin-top:20px;">
+        <button onclick="goHome()" style="background:#ccc; border:2px solid #999; padding:4px 16px; font-size:12px; cursor:pointer; font-family:'Times New Roman',Times,serif;">🏠 На главную</button>
+        <button onclick="goBack()" style="background:#ccc; border:2px solid #999; padding:4px 16px; font-size:12px; cursor:pointer; font-family:'Times New Roman',Times,serif; margin-left:8px;">◀ Назад</button>
+    </div>
+    <div style="margin-top:40px; font-size:11px; color:#888;">
+        Internet Explorer 5.0 | Windows 98<br>
+        Код ошибки: 0x800C0008 | Невозможно установить соединение с сервером
+    </div>
+</div>
+</div>
+<div id="borough-content" style="display:none;">
+
 
 <!-- ШАПКА -->
 <div id="header">
@@ -1293,6 +1666,231 @@
         });
     }
     randomizeStock();
+</script>
+
+
+</div>
+    </div>
+
+    <div id="browser-statusbar">
+        <div class="status-left">
+            <div class="status-box" id="status-text">Готово</div>
+            <div class="status-box" id="status-zone">Интернет</div>
+        </div>
+        <div class="status-right">
+            <div class="status-icon">🌐</div>
+            <div class="status-icon" style="width:40px;">56K</div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+let history_stack = ['home'];
+let history_pos = 0;
+let current_view = 'home';
+
+function updateButtons() {
+    document.getElementById('btn-back').disabled = (history_pos <= 0);
+    document.getElementById('btn-forward').disabled = (history_pos >= history_stack.length - 1);
+}
+
+function showView(view) {
+    document.getElementById('homepage').style.display = 'none';
+    document.getElementById('errorpage').style.display = 'none';
+    document.getElementById('borough-content').style.display = 'none';
+
+    if (view === 'home') {
+        document.getElementById('homepage').style.display = 'block';
+        document.getElementById('address-input').value = 'http://homepage.boroughnet.net';
+        document.getElementById('status-text').textContent = 'Готово';
+        document.getElementById('browser-titlebar').querySelector('.title-text').textContent = 'BoroughNET Explorer — Borough Builders Co.';
+    } else if (view === 'error') {
+        document.getElementById('errorpage').style.display = 'block';
+        document.getElementById('status-text').textContent = 'Ошибка';
+    } else if (view === 'borough') {
+        document.getElementById('borough-content').style.display = 'block';
+        document.getElementById('address-input').value = 'http://www.boroughbuilders.net';
+        document.getElementById('status-text').textContent = 'Готово';
+        document.getElementById('browser-titlebar').querySelector('.title-text').textContent = 'BoroughNET Explorer — Borough Builders Co.';
+    }
+    current_view = view;
+    updateButtons();
+}
+
+function goHome() {
+    if (current_view !== 'home') {
+        history_pos++;
+        history_stack = history_stack.slice(0, history_pos);
+        history_stack.push('home');
+    }
+    showView('home');
+}
+
+function goBack() {
+    if (history_pos > 0) {
+        history_pos--;
+        showView(history_stack[history_pos]);
+    }
+}
+
+function goForward() {
+    if (history_pos < history_stack.length - 1) {
+        history_pos++;
+        showView(history_stack[history_pos]);
+    }
+}
+
+function goError(url) {
+    document.getElementById('error-url').textContent = url;
+    document.getElementById('address-input').value = url;
+    document.getElementById('status-text').textContent = 'Ошибка: невозможно подключиться';
+    document.getElementById('browser-titlebar').querySelector('.title-text').textContent = 'BoroughNET Explorer — Ошибка';
+
+    history_pos++;
+    history_stack = history_stack.slice(0, history_pos);
+    history_stack.push('error');
+    showView('error');
+}
+
+function loadBorough() {
+    history_pos++;
+    history_stack = history_stack.slice(0, history_pos);
+    history_stack.push('borough');
+    showView('borough');
+
+    if (typeof showSection === 'function') {
+        showSection('catalog');
+    }
+    if (typeof randomizeStock === 'function') {
+        randomizeStock();
+    }
+}
+
+function refreshPage() {
+    document.getElementById('status-text').textContent = 'Обновление...';
+    setTimeout(() => {
+        showView(current_view);
+    }, 500);
+}
+
+function stopLoading() {
+    document.getElementById('status-text').textContent = 'Остановлено';
+}
+
+function goToAddress() {
+    const addr = document.getElementById('address-input').value.trim();
+    if (addr.includes('boroughbuilders') || addr.includes('borough-builders')) {
+        loadBorough();
+    } else if (addr === 'http://homepage.boroughnet.net' || addr === '') {
+        goHome();
+    } else {
+        goError(addr);
+    }
+}
+
+// Make mini-map clickable to show big map
+document.addEventListener('DOMContentLoaded', function() {
+    const miniMap = document.getElementById('mini-map');
+    if (miniMap) {
+        miniMap.style.cursor = 'pointer';
+        miniMap.onclick = function() {
+            if (typeof showSection === 'function') {
+                showSection('map');
+            }
+        };
+    }
+});
+
+document.getElementById('address-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        goToAddress();
+    }
+});
+</script>
+
+<script>
+
+    let orders = [
+        { name: "Капитальный ремонт квартиры", addr: "452 Atlantic Ave, Apt 3B" }
+    ];
+
+    function showSection(section) {
+        document.getElementById('catalog-wrap').style.display = 'none';
+        document.getElementById('big-map-wrap').style.display = 'none';
+        document.getElementById('orders-wrap').style.display = 'none';
+        document.getElementById('jobs-wrap').style.display = 'none';
+        document.getElementById('materials-wrap').style.display = 'none';
+
+        if (section === 'catalog') {
+            document.getElementById('catalog-wrap').style.display = 'block';
+        } else if (section === 'map') {
+            document.getElementById('big-map-wrap').style.display = 'block';
+        } else if (section === 'orders') {
+            document.getElementById('orders-wrap').style.display = 'block';
+            renderOrders();
+        } else if (section === 'jobs') {
+            document.getElementById('jobs-wrap').style.display = 'block';
+        } else if (section === 'materials') {
+            document.getElementById('materials-wrap').style.display = 'block';
+        }
+    }
+
+    function addOrder(serviceName) {
+        const addresses = [
+            "14 Dean St, Apt 2A",
+            "88 Bergen St, Apt 5C",
+            "203 Pacific St, Storefront",
+            "67 St Marks Ave, Apt 1D",
+            "401 Atlantic Ave, Office 302"
+        ];
+        const addr = addresses[Math.floor(Math.random() * addresses.length)];
+        orders.push({ name: serviceName, addr: addr });
+        alert('Заказ принят: ' + serviceName + '\nАдрес: ' + addr + '\n\nПерейдите в раздел "Управление заказами" для отслеживания.');
+    }
+
+    function renderOrders() {
+        const list = document.getElementById('orders-list');
+        if (orders.length === 0) {
+            list.innerHTML = '<div style="padding:20px;text-align:center;color:#666;">У вас пока нет активных заказов.</div>';
+            return;
+        }
+        let html = '';
+        orders.forEach((o, i) => {
+            html += '<div class="order-row">' +
+                '<div class="order-info">' +
+                '<div class="oname">' + o.name + '</div>' +
+                '<div class="oaddr">• ' + o.addr + ' — 29-й сектор</div>' +
+                '</div>' +
+                '<button class="btn-manage" onclick="alert(\'Управление объектом: ' + o.name + '\nАдрес: ' + o.addr + '\')">Управлять »</button>' +
+                '</div>';
+        });
+        list.innerHTML = html;
+    }
+
+    // Мини-карта кликабельна
+    // Карта временно недоступна
+    document.getElementById('mini-map').style.cursor = 'default';
+
+
+    // Randomly mark some materials as out of stock
+    function randomizeStock() {
+        const cells = document.querySelectorAll('.price-cell[data-stock="yes"]');
+        const count = Math.floor(Math.random() * 4) + 2; // 2-5 items out of stock
+        const indices = [];
+        while (indices.length < count) {
+            const idx = Math.floor(Math.random() * cells.length);
+            if (!indices.includes(idx)) indices.push(idx);
+        }
+        indices.forEach(i => {
+            cells[i].textContent = 'Нет в наличии';
+            cells[i].style.color = '#888';
+            cells[i].style.fontStyle = 'italic';
+            cells[i].style.fontWeight = 'normal';
+        });
+    }
+    randomizeStock();
+
 </script>
 
 </body>
