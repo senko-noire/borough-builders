@@ -626,6 +626,45 @@ html, body {
 <base target="_blank">
 </head>
 <body>
+
+<!-- DIAL-UP LOADING OVERLAY -->
+<div id="dialup-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); z-index:99999; align-items:center; justify-content:center;">
+    <div style="width:380px; background:#c0c0c0; border:2px solid; border-color:#dfdfdf #000 #000 #dfdfdf; box-shadow:4px 4px 12px rgba(0,0,0,0.5); font-family:'MS Sans Serif',Tahoma,sans-serif; font-size:11px;">
+        <!-- Title bar -->
+        <div style="background:linear-gradient(to right,#000080,#1084d0); color:#fff; padding:3px 5px; display:flex; align-items:center; justify-content:space-between; font-weight:bold; cursor:default; user-select:none;">
+            <span>📞 Подключение к BoroughNET</span>
+            <span style="background:#c0c0c0; border:1px solid; border-color:#fff #000 #000 #fff; width:16px; height:14px; display:flex; align-items:center; justify-content:center; font-size:9px; color:#000; cursor:pointer;" onclick="cancelDialup()">×</span>
+        </div>
+        <!-- Body -->
+        <div style="padding:14px 16px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <div style="font-size:28px;">🌐</div>
+                <div>
+                    <div style="font-weight:bold; font-size:12px; margin-bottom:2px;">Подключение к интернету...</div>
+                    <div id="dialup-status" style="color:#555;">Набор номера: (718) 555-0100</div>
+                </div>
+            </div>
+            <!-- Progress bar -->
+            <div style="border:1px solid; border-color:#808080 #fff #fff #808080; background:#fff; padding:2px; margin-bottom:10px;">
+                <div id="dialup-progress" style="width:0%; height:18px; background:linear-gradient(to bottom,#000080,#1084d0); transition:width 0.3s;"></div>
+            </div>
+            <!-- Details -->
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#333; margin-bottom:12px;">
+                <span id="dialup-speed">Скорость: —</span>
+                <span id="dialup-time">Время: 0:00</span>
+            </div>
+            <!-- Modem log -->
+            <div style="background:#000; color:#0f0; font-family:'Courier New',monospace; font-size:10px; padding:6px; height:70px; overflow:hidden; border:1px solid #808080; line-height:1.4;" id="dialup-log">
+                &gt; Инициализация модема...<br>
+            </div>
+            <!-- Buttons -->
+            <div style="text-align:center; margin-top:12px;">
+                <button onclick="cancelDialup()" style="background:#c0c0c0; border:1px solid; border-color:#fff #000 #000 #fff; padding:3px 20px; font-size:11px; font-family:'MS Sans Serif',Tahoma,sans-serif; cursor:pointer;">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="desktop">
 <div id="browser-window">
     <div id="browser-titlebar">
@@ -1645,7 +1684,7 @@ html, body {
         list.innerHTML = html;
     }
 
-    // Мини-карта кликабельна
+    // Мини-карта — декор, не кликабельна
     // Карта временно недоступна
     document.getElementById('mini-map').style.cursor = 'default';
 
@@ -1859,7 +1898,7 @@ document.getElementById('address-input').addEventListener('keypress', function(e
         list.innerHTML = html;
     }
 
-    // Мини-карта кликабельна
+    // Мини-карта — декор, не кликабельна
     // Карта временно недоступна
     document.getElementById('mini-map').style.cursor = 'default';
 
@@ -1882,6 +1921,162 @@ document.getElementById('address-input').addEventListener('keypress', function(e
     }
     randomizeStock();
 
+</script>
+
+
+<script>
+/* ===== DIAL-UP LOADING SIMULATION ===== */
+let dialupInterval = null;
+let dialupProgress = 0;
+let dialupSeconds = 0;
+let dialupMessages = [
+    { pct: 5,  msg: "> ATDT7185550100", status: "Набор номера..." },
+    { pct: 12, msg: "> Соединение установлено", status: "Рукопожатие модема..." },
+    { pct: 20, msg: "> CONNECT 33600/ARQ/V34/LAPM/V42BIS", status: "Согласование скорости..." },
+    { pct: 28, msg: "> Сжатие данных: V.42bis включено", status: "Проверка линии..." },
+    { pct: 35, msg: "> Проверка имени пользователя...", status: "Авторизация..." },
+    { pct: 42, msg: "> Пользователь: guest", status: "Проверка пароля..." },
+    { pct: 50, msg: "> Пароль: ********", status: "Вход в систему..." },
+    { pct: 58, msg: "> Добро пожаловать в BoroughNET!", status: "Получение IP-адреса..." },
+    { pct: 65, msg: "> IP-адрес: 192.168.1.105", status: "Настройка сети..." },
+    { pct: 72, msg: "> DNS: 192.168.1.1", status: "Получение данных..." },
+    { pct: 80, msg: "> Загрузка страницы...", status: "Загрузка контента..." },
+    { pct: 88, msg: "> Получено: 14.2 КБ / 18.5 КБ", status: "Завершение..." },
+    { pct: 95, msg: "> Соединение стабильно", status: "Готово!" },
+    { pct: 100, msg: "> BoroughNET подключён", status: "Подключено" }
+];
+let dialupMsgIndex = 0;
+
+function startDialup(callback) {
+    const overlay = document.getElementById('dialup-overlay');
+    const progress = document.getElementById('dialup-progress');
+    const log = document.getElementById('dialup-log');
+    const status = document.getElementById('dialup-status');
+    const speedEl = document.getElementById('dialup-speed');
+    const timeEl = document.getElementById('dialup-time');
+
+    overlay.style.display = 'flex';
+    dialupProgress = 0;
+    dialupSeconds = 0;
+    dialupMsgIndex = 0;
+    progress.style.width = '0%';
+    log.innerHTML = '&gt; Инициализация модема...<br>';
+    status.textContent = 'Набор номера: (718) 555-0100';
+    speedEl.textContent = 'Скорость: —';
+    timeEl.textContent = 'Время: 0:00';
+
+    if (dialupInterval) clearInterval(dialupInterval);
+
+    // Random duration: 70% chance 2-4s, 30% chance 5-6s
+    var targetDuration;
+    if (Math.random() < 0.7) {
+        targetDuration = 2000 + Math.random() * 2000; // 2-4 seconds
+    } else {
+        targetDuration = 5000 + Math.random() * 1000; // 5-6 seconds
+    }
+    var stepInterval = targetDuration / 100; // ms per 1% progress
+
+    dialupInterval = setInterval(function() {
+        dialupProgress += 1;
+        if (dialupProgress > 100) dialupProgress = 100;
+        progress.style.width = dialupProgress + '%';
+
+        while (dialupMsgIndex < dialupMessages.length && dialupProgress >= dialupMessages[dialupMsgIndex].pct) {
+            log.innerHTML += dialupMessages[dialupMsgIndex].msg + '<br>';
+            status.textContent = dialupMessages[dialupMsgIndex].status;
+            log.scrollTop = log.scrollHeight;
+            dialupMsgIndex++;
+        }
+
+        if (dialupProgress > 15 && dialupProgress < 95) {
+            var speed = Math.floor(28000 + Math.random() * 8000);
+            speedEl.textContent = 'Скорость: ' + speed + ' бит/с';
+        } else if (dialupProgress >= 95) {
+            speedEl.textContent = 'Скорость: 33600 бит/с';
+        }
+
+        // Timer based on actual progress proportion
+        var elapsedMs = dialupProgress * stepInterval;
+        var totalSecs = Math.floor(elapsedMs / 1000);
+        var mins = Math.floor(totalSecs / 60);
+        var secs = totalSecs % 60;
+        timeEl.textContent = 'Время: ' + mins + ':' + (secs < 10 ? '0' : '') + secs;
+
+        if (dialupProgress >= 100) {
+            clearInterval(dialupInterval);
+            setTimeout(function() {
+                overlay.style.display = 'none';
+                if (callback) callback();
+            }, 300);
+        }
+    }, stepInterval);
+}
+
+function cancelDialup() {
+    if (dialupInterval) {
+        clearInterval(dialupInterval);
+        dialupInterval = null;
+    }
+    var overlay = document.getElementById('dialup-overlay');
+    var log = document.getElementById('dialup-log');
+    var status = document.getElementById('dialup-status');
+    log.innerHTML += '&gt; Соединение разорвано пользователем.<br>';
+    status.textContent = 'Отменено';
+    setTimeout(function() {
+        overlay.style.display = 'none';
+    }, 800);
+}
+
+// Override navigation functions
+var _origShowView = showView;
+showView = function(view) {
+    startDialup(function() {
+        _origShowView(view);
+    });
+};
+
+var _origGoHome = goHome;
+goHome = function() {
+    if (current_view !== 'home') {
+        history_pos++;
+        history_stack = history_stack.slice(0, history_pos);
+        history_stack.push('home');
+    }
+    startDialup(function() {
+        _origShowView('home');
+    });
+};
+
+var _origGoError = goError;
+goError = function(url) {
+    document.getElementById('error-url').textContent = url;
+    document.getElementById('address-input').value = url;
+    document.getElementById('status-text').textContent = 'Ошибка: невозможно подключиться';
+    document.getElementById('browser-titlebar').querySelector('.title-text').textContent = 'BoroughNET Explorer — Ошибка';
+
+    history_pos++;
+    history_stack = history_stack.slice(0, history_pos);
+    history_stack.push('error');
+    startDialup(function() {
+        _origShowView('error');
+    });
+};
+
+var _origLoadBorough = loadBorough;
+loadBorough = function() {
+    history_pos++;
+    history_stack = history_stack.slice(0, history_pos);
+    history_stack.push('borough');
+    startDialup(function() {
+        _origShowView('borough');
+        if (typeof showSection === 'function') {
+            showSection('catalog');
+        }
+        if (typeof randomizeStock === 'function') {
+            randomizeStock();
+        }
+    });
+};
 </script>
 
 </body>
